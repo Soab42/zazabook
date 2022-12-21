@@ -1,13 +1,67 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  margin: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.input {
+  display: flex;
+  gap: 10px;
+}
+#modal {
+  animation: open 2s forwards;
+
+  /* transition: 1s; */
+  translate: -5rem;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes open {
+  100% {
+    translate: -12rem;
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    scale: 1;
+  }
+  20% {
+    translate: 1rem;
+    scale: 1;
+  }
+  90% {
+    translate: 1rem;
+    scale: 1;
+  }
+  0% {
+    translate: -12rem;
+    scale: 1;
+  }
+}
+
+.sent {
+  background: rgba(68, 219, 63, 0.652);
+  width: max-content;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .img {
+    @apply h-10 w-10 flex justify-center items-center font-thin text-white  rounded-full bg-slate-500;
+  }
+  .btn {
+    @apply p-1 bg-slate-300 rounded-sm px-2 hover:bg-blue-400 duration-700;
+  }
+  .sent {
+    @apply bg-green-400 w-max max-w-[70vw] justify-start
+    p-2 text-sm rounded-br-2xl rounded-tl-2xl px-4 text-start;
+  }
+  .recive {
+    @apply bg-sky-300 text-sm px-4 w-max max-w-[70vw] flex justify-self-end p-2 rounded-tl-2xl rounded-br-2xl;
+  }
 }
