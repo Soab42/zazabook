@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
 
-import { getDatabase, push, ref, set } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import { useRef, useState } from "react";
 import { app, auth } from "../Firebase";
 import Modal from "../Modal";
@@ -32,7 +32,10 @@ export default function Home() {
           onClick={() => {
             clearTimeout(timeout);
             const db = getDatabase(app);
-            const dbref = ref(db, "public/" + auth.currentUser.uid);
+            const dbref = ref(
+              db,
+              "public/" + auth.currentUser.uid + "/" + Date.now()
+            );
             const data = {
               post: postref.current.value,
               img: auth.currentUser.photoURL,

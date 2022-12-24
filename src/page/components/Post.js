@@ -1,13 +1,12 @@
+/* eslint-disable no-unused-expressions */
 import { Button } from "@mui/material";
 
 import {
   getDatabase,
   ref,
   onValue,
-  limitToLast,
-  orderByChild,
   orderByKey,
-  orderByValue,
+  orderByChild,
 } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { app, auth } from "../../Firebase";
@@ -21,56 +20,78 @@ export default function Post() {
 
   useEffect(() => {
     const db = getDatabase(app);
-    const publicref = ref(db, "public");
+    const publicref = ref(db, "public", orderByChild("time"));
     onValue(publicref, (snaphot) => {
-      const data = Object.values(snaphot.val());
-      setData(Object.values(data));
+      setData(Object.values(snaphot.val()));
     });
   }, []);
-  console.log(data[0]);
+  var final = [];
+
+  for (let element of data) {
+    final.push(...Object.values(element));
+  }
+  // console.log(data);
+  // console.log(Object.entries(data));
+
+  // console.log(data2);
+  // for (let element of data) {
+  //   setfinalData(Object.values(element));
+  // }
+  // console.log(...final.filter((a) => a.name === auth.currentUser.displayName));
   return (
     <div>
-      {data.map((x) => (
-        <div className="p-2 my-16">
-          <div className="flex gap-2 capitalize">
-            <img className="img" src={x.img} alt="" />
-            <div className="relative">
-              <p>{x.name}</p>
-              <p className="absolute bottom-0 text-xs scale-75 -left-3  min-w-max ">
-                {moment(x.time).fromNow()}
-              </p>
-            </div>
-          </div>
-          <p className="text-justify p-10 pb-2 min-h-full ">{x.post}</p>
-          <div className="flex justify-between px-4 bg-slate-100 text-xs">
-            <p>{like} likes</p>
-            <p>{share} share</p>
-          </div>
+      {final.sort((a, b) => a.time - b.time) &&
+        final
+          // .filter((a) => a.name === auth.currentUser.displayName)
+          .map((x) => {
+            const { img, name, post, time } = x;
 
-          <div className="flex justify-between px-4 py-1 bg-slate-100">
-            <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              onClick={() => (like === 0 ? setlike(1) : setlike(0))}
-            >
-              {like === 0 ? "like" : "liked"}
-            </Button>
+            return x ? (
+              <div className="p-2 my-16">
+                <div className="flex gap-2 capitalize">
+                  <img className="img" src={img} alt="" />
+                  <div className="relative">
+                    <p>{name}</p>
+                    <p className="absolute bottom-0 text-xs scale-75 -left-3  min-w-max ">
+                      {moment(time).fromNow()}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-justify p-10 pb-2 min-h-full ">{post}</p>
+                <div className="flex justify-between px-4 bg-slate-100 text-xs">
+                  <p>{like} likes</p>
+                  <p>{share} share</p>
+                </div>
 
-            <Button variant="contained" color="primary" size="small">
-              Comment
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              onClick={() => (share === 0 ? setShare(1) : setShare(0))}
-            >
-              {share === 0 ? "share" : "shared"}
-            </Button>
-          </div>
-        </div>
-      ))}
+                <div className="flex justify-between px-4 py-1 bg-slate-100">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() => (like === 0 ? setlike(1) : setlike(0))}
+                  >
+                    {like === 0 ? "like" : "liked"}
+                  </Button>
+
+                  <Button variant="contained" color="primary" size="small">
+                    Comment
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() => (share === 0 ? setShare(1) : setShare(0))}
+                  >
+                    {share === 0 ? "share" : "shared"}
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              "null"
+            );
+          })
+
+          .reverse()}
     </div>
   );
 }

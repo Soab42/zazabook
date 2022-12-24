@@ -41,7 +41,9 @@ code {
     scale: 1;
   }
 }
-
+.filebtn {
+  display: none;
+}
 .sent {
   background: rgba(68, 219, 63, 0.652);
   width: max-content;
@@ -63,5 +65,11 @@ code {
   }
   .recive {
     @apply bg-sky-300 text-sm px-4 w-max max-w-[70vw] flex justify-self-end p-2 rounded-tl-2xl rounded-br-2xl;
+  }
+  .recivetime {
+    @apply right-0 fixed;
+  }
+  .senttime {
+    @apply left-[-1px];
   }
 }

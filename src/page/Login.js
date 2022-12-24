@@ -13,11 +13,12 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import { ref, serverTimestamp, set, update } from "firebase/database";
 
 import React, { useEffect, useState } from "react";
 import GoogleButton from "react-google-button";
 import { Link } from "react-router-dom";
-import { auth } from "../Firebase";
+import { auth, db } from "../Firebase";
 import Home from "./Home";
 
 export default function Login() {
@@ -38,6 +39,14 @@ export default function Login() {
     signInWithPopup(auth, provider)
       .then((result) => {
         setUser(result);
+        set(ref(db, "userchat/" + auth.currentUser.uid));
+        set(ref(db, "user/" + auth.currentUser.uid), {
+          name: auth.currentUser.displayName,
+          email: auth.currentUser.email,
+          id: auth.currentUser.uid,
+          time: serverTimestamp(),
+          image: auth.currentUser.photoURL,
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -72,9 +81,9 @@ export default function Login() {
                   <Message />
                 </Link>
               </div>
-              <div className="btn">
+              <Link to={"/profile"} className="btn">
                 <PersonSearch />
-              </div>
+              </Link>
               <button className="btn" onClick={logout}>
                 <Logout />
               </button>
