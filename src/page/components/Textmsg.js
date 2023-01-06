@@ -4,24 +4,39 @@ import { auth } from "../../Firebase";
 
 export default function Textmsg({ text, username, time, img }) {
   return (
-    <div className="grid gap-2 p-2 ">
-      <p
-        className={`${
-          username === auth.currentUser.displayName ? "sent" : "recive"
-        } shadow-md relative`}
-      >
-        <p>{text}</p>
-        <img src={img} alt="" />
+    <div>
+      <div className="grid gap-2 p-2 px-8 ">
         <p
           className={`${
-            username === auth.currentUser.displayName
-              ? "senttime"
-              : "recivetime"
-          } text-[10px] absolute bottom-[-16px] w-max`}
+            username === auth.currentUser.displayName ? "sent" : "recive"
+          } shadow-md relative`}
         >
-          {moment(time).fromNow()}
+          {
+            <img
+              src={auth.currentUser.photoURL}
+              alt=""
+              className={`${
+                username === auth.currentUser.displayName
+                  ? "left-[-1.7rem]"
+                  : "right-[-1.7rem]"
+              } w-6 absolute  rounded-full`}
+            />
+          }
+          {text === "" ? null : <p>{text}</p>}
+          {!img ? null : (
+            <img src={img} alt="" className="max-h-44 rounded-xl" />
+          )}
+          <p
+            className={`${
+              username === auth.currentUser.displayName
+                ? "senttime"
+                : "recivetime"
+            } text-[10px] absolute bottom-[-16px] w-max`}
+          >
+            {moment(time).fromNow()}
+          </p>
         </p>
-      </p>
+      </div>
     </div>
   );
 }

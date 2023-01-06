@@ -1,23 +1,30 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Consumer from "./context/Consumer";
 
-import Home from "./page/Home";
 import Layout from "./page/Layout";
 import Login from "./page/Login";
-import Massenger from "./page/Massenger";
+import AuthProvider from "./context/Authcontext";
+import Postdetails from "./page/Postdetails";
 import Profile from "./page/Profile";
 import Test from "./test/Test";
+import N404 from "./page/N404";
 export default function App() {
   return (
     <div>
       <BrowserRouter>
-        <Routes>
-          <Route path="" element={<Login />} />
+        <AuthProvider>
+          <Routes>
+            <Route path="" element={<Login />} />
+            <Route path="post" element={<Postdetails />} />
 
-          <Route path="messenger" element={<Layout />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="test" element={<Test />} />
-        </Routes>
+            <Route path="con" element={<Consumer />} />
+            <Route path="messenger" element={<Layout />} />
+            <Route path="profile/:id" element={<Profile />} />
+            <Route path="test" element={<Test />} />
+            <Route path="/*" element={<N404 />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
       {/* <Login />s */}
     </div>

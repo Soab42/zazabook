@@ -47,6 +47,7 @@ export default function Home() {
             set(dbref, data)
               .then(() => {
                 setVisible(true);
+                postref.current.value = null;
               })
               .catch((e) => alert(e));
           }}

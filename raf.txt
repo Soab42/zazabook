@@ -1,0 +1,114 @@
+
+    // if (textref.current.value && file) {
+    //   console.log("both");
+    //   console.log(textref.current.value);
+    //   console.log(file);
+    // const storageRef = storeRef(storage, file.name);
+
+    // uploadBytes(storageRef, file)
+    //   .then(() => {
+    //     getDownloadURL(storageRef)
+    //       .then((URL) => setfile(URL))
+    //       .catch((err) => console.log(err));
+    //   })
+    //   .catch((err) => console.log(err));
+    // const data = {
+    //   username: auth.currentUser.displayName,
+    //   time: Date.now(),
+    //   text: textref.current.value,
+    //   img: file,
+    // };
+    // const dbref = ref(db, "chat/" + combinedID + "/messege");
+    // push(dbref, data);
+    // update(ref(db, "userchat/" + userid + "/" + combinedID + "/"), {
+    //   date: serverTimestamp(),
+    // });
+    // update(ref(db, "userchat/" + userid + "/" + combinedID + "/userinfo/"), {
+    //   text: textref.current.value,
+    // }).then(
+    //   () => (textref.current.value = null),
+    //   setfile(null)
+    //   // setUrl(null)
+    // );
+    // }
+    //  else if (url) {
+    //   console.log("logg from only url");
+    // } else if (textref.current.value) {
+    //   console.log(`logg from only text ${textref.current.value}`);
+    // }
+    // else {
+    //   alert("saif");
+    // }
+    //   if (url && textref.current.value) {
+    //     const storageRef = storeRef(storage, file && file.name);
+    //     file &&
+    //       uploadBytes(storageRef, file)
+    //         .then(() => {
+    //           getDownloadURL(storageRef)
+    //             .then((URL) => setUrl(URL))
+    //             .catch((err) => console.log(err));
+    //         })
+    //         .catch((err) => console.log(err));
+    //     const data = {
+    //       username: auth.currentUser.displayName,
+    //       time: Date.now(),
+    //       text: textref.current.value,
+    //       img: url,
+    //     };
+    //     const dbref = ref(db, "chat/" + combinedID + "/messege");
+    //     push(dbref, data);
+    //     update(ref(db, "userchat/" + userid + "/" + combinedID + "/"), {
+    //       date: serverTimestamp(),
+    //     });
+    //     update(ref(db, "userchat/" + userid + "/" + combinedID + "/userinfo/"), {
+    //       text: textref.current.value,
+    //     }).then(
+    //       () => (textref.current.value = null),
+    //       setfile(null),
+    //       setUrl(null)
+    //     );
+    //   } else if (file) {
+    //     const storageRef = storeRef(storage, file && file.name);
+    //     file &&
+    //       uploadBytes(storageRef, file)
+    //         .then(() => {
+    //           getDownloadURL(storageRef)
+    //             .then((URL) => setUrl(URL))
+    //             .catch((err) => console.log(err));
+    //         })
+    //         .catch((err) => console.log(err));
+
+    //     const dbref = ref(db, "chat/" + combinedID + "/messege");
+    //     push(dbref, {
+    //       username: auth.currentUser.displayName,
+    //       time: Date.now(),
+    //       img: url,
+    //     });
+    //     update(ref(db, "userchat/" + userid + "/" + combinedID + "/"), {
+    //       date: serverTimestamp(),
+    //     });
+    //     update(ref(db, "userchat/" + userid + "/" + combinedID + "/userinfo/"), {
+    //       text: "sent a photo",
+    //     }).then(
+    //       () => (textref.current.value = null),
+    //       setfile(null),
+    //       setUrl(null)
+    //     );
+    //   } else if (textref.current.value) {
+    //     const data = {
+    //       username: auth.currentUser.displayName,
+    //       time: Date.now(),
+    //       text: textref.current.value,
+    //       // img: url,
+    //     };
+    //     const dbref = ref(db, "chat/" + combinedID + "/messege");
+    //     push(dbref, data);
+    //     update(ref(db, "userchat/" + userid + "/" + combinedID + "/"), {
+    //       date: serverTimestamp(),
+    //     });
+    //     update(ref(db, "userchat/" + userid + "/" + combinedID + "/userinfo/"), {
+    //       text: textref.current.value,
+    //     }).then(() => (textref.current.value = null));
+    //   } else {
+    //     alert("smile");
+    //   }

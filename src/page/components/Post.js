@@ -12,10 +12,16 @@ import React, { useEffect, useState } from "react";
 import { app, auth } from "../../Firebase";
 
 import moment from "moment/moment";
+import {
+  ChatBubbleOutline,
+  LinearScale,
+  Lock,
+  Reply,
+  ThumbUpAltOutlined,
+} from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 export default function Post() {
-  const [like, setlike] = useState(0);
-  const [share, setShare] = useState(0);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -44,46 +50,39 @@ export default function Post() {
         final
           // .filter((a) => a.name === auth.currentUser.displayName)
           .map((x) => {
-            const { img, name, post, time } = x;
+            const { img, name, post, time, uid } = x;
 
             return x ? (
-              <div className="p-2 my-16">
-                <div className="flex gap-2 capitalize">
-                  <img className="img" src={img} alt="" />
-                  <div className="relative">
-                    <p>{name}</p>
-                    <p className="absolute bottom-0 text-xs scale-75 -left-3  min-w-max ">
-                      {moment(time).fromNow()}
-                    </p>
+              <div className="p-2 my-4">
+                <div className="flex justify-between gap-2 capitalize">
+                  <div className="flex justify-between gap-2 capitalize">
+                    <img className="img" src={img} alt="" />
+                    <div className="relative">
+                      <Link to={`profile/${uid}`}>
+                        <p>{name}</p>
+                      </Link>
+                      <p className="absolute bottom-0 text-xs scale-75 -left-3  min-w-max flex gap-2">
+                        {moment(time).fromNow()}
+                        <Lock fontSize="small" />
+                      </p>
+                    </div>
+                  </div>
+                  <div className="justify-self-center">
+                    <LinearScale />
                   </div>
                 </div>
-                <p className="text-justify p-10 pb-2 min-h-full ">{post}</p>
-                <div className="flex justify-between px-4 bg-slate-100 text-xs">
-                  <p>{like} likes</p>
-                  <p>{share} share</p>
+                <p className="text-justify py-3 pb-2 min-h-full ">{post}</p>
+                <div className="flex justify-between px-4 bg-slate-100 text-xs py-1">
+                  <p>{} likes</p>
+                  <p>{} share</p>
                 </div>
 
-                <div className="flex justify-between px-4 py-1 bg-slate-100">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() => (like === 0 ? setlike(1) : setlike(0))}
-                  >
-                    {like === 0 ? "like" : "liked"}
-                  </Button>
-
-                  <Button variant="contained" color="primary" size="small">
-                    Comment
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() => (share === 0 ? setShare(1) : setShare(0))}
-                  >
-                    {share === 0 ? "share" : "shared"}
-                  </Button>
+                <div className="flex justify-between px-4 py-2  border-t border-black text-[5px]">
+                  <ThumbUpAltOutlined fontSize="small" />
+                  <ChatBubbleOutline fontSize="small" />
+                  <p className="-scale-x-100">
+                    <Reply fontSize="small" />
+                  </p>
                 </div>
               </div>
             ) : (

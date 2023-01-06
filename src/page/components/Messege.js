@@ -20,16 +20,20 @@ export default function Messege({ id }) {
   // console.log(Object.entries(massege));
   return (
     <div className="">
-      {massege
-        ? Object.entries(massege).map((x) => {
-            console.log(x);
-            let { text, time, username, img } = x[1];
+      {massege ? (
+        Object.entries(massege).map((x) => {
+          // console.log(x);
+          let { text, time, username, img } = x[1];
 
-            return (
-              <Textmsg text={text} img={img} time={time} username={username} />
-            );
-          })
-        : null}
+          return (
+            <Textmsg text={text} img={img} time={time} username={username} />
+          );
+        })
+      ) : (
+        <div className="h-[86vh] uppercase bg-slate-300 flex justify-center items-center">
+          please select a chat
+        </div>
+      )}
       <div ref={scrollref}></div>
     </div>
   );
