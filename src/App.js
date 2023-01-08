@@ -15,9 +15,8 @@ export default function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="post" element={<Postdetails />} />
-
             <Route path="con" element={<Consumer />} />
             <Route path="messenger" element={<Layout />} />
             <Route path="profile/:id" element={<Profile />} />

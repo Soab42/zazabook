@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 import { auth } from "../../Firebase";
 
-export default function Textmsg({ text, username, time, img }) {
+export default function Textmsg({ text, username, time, img, userimg }) {
   return (
     <div>
       <div className="grid gap-2 p-2 px-8 ">
@@ -13,7 +13,7 @@ export default function Textmsg({ text, username, time, img }) {
         >
           {
             <img
-              src={auth.currentUser.photoURL}
+              src={userimg}
               alt=""
               className={`${
                 username === auth.currentUser.displayName

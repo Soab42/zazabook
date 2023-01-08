@@ -1,5 +1,5 @@
 // import { Logout } from "@mui/icons-material";
-import { Logout, Message, PersonSearch } from "@mui/icons-material";
+import { Logout, Message, PersonSearch, PostAdd } from "@mui/icons-material";
 
 import React from "react";
 import GoogleButton from "react-google-button";
@@ -12,7 +12,7 @@ export default function Login() {
   const { user, google, logout } = useAuth();
   // console.log(user);
   return (
-    <div className="p-1  ">
+    <div className="p-1 grid justify-center">
       {!user ? (
         <div classname="h-screen">
           <div className="h-[50px] rounded-xl overflow-hidden">
@@ -22,7 +22,7 @@ export default function Login() {
         </div>
       ) : (
         <>
-          <div className="flex h-8 justify-between text-sm">
+          <div className="flex h-8 justify-between text-sm w-[60vw]">
             <div className="flex gap-1 items-center">
               <img
                 className="rounded-full h-10 p-1"
@@ -34,6 +34,9 @@ export default function Login() {
 
             {/* <p>{user.email}</p> */}
             <div className="h-8 gap-2 flex overflow-hidden">
+              <Link to={"/"} className={"btn"}>
+                <PostAdd />
+              </Link>
               <div className="btn">
                 <Link to={"/messenger"}>
                   <Message />

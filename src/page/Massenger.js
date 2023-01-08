@@ -22,7 +22,7 @@ export default function Massenger({ combinedID, name, image, userid }) {
   const submit = async (e) => {
     e.preventDefault();
     if (file) {
-      const storageRef = storeRef(storage, file.name);
+      const storageRef = storeRef(storage, "Messege/" + file.name);
 
       await uploadBytes(storageRef, file)
         .then(() => {
@@ -33,6 +33,7 @@ export default function Massenger({ combinedID, name, image, userid }) {
                 time: Date.now(),
                 text: textref.current.value,
                 img: URL,
+                userimg: auth.currentUser.photoURL,
               };
               const dbref = ref(db, "chat/" + combinedID + "/messege");
               await push(dbref, data);
@@ -45,6 +46,7 @@ export default function Massenger({ combinedID, name, image, userid }) {
         username: auth.currentUser.displayName,
         time: Date.now(),
         text: textref.current.value,
+        userimg: auth.currentUser.photoURL,
       };
       const dbref =
         textref.current.value && ref(db, "chat/" + combinedID + "/messege");
@@ -62,36 +64,6 @@ export default function Massenger({ combinedID, name, image, userid }) {
         // : file && "sent a photo",
       }
     ).then(() => (textref.current.value = null), setfile(null));
-
-    // else if (file) {
-    //   const storageRef = storeRef(storage, file && file.name);
-    //   file &&
-    //     (await uploadBytes(storageRef, file)
-    //       .then(() => {
-    //         getDownloadURL(storageRef)
-    //           .then(async (URL) => {
-    //             const data = {
-    //               username: auth.currentUser.displayName,
-    //               time: Date.now(),
-    //               img: URL,
-    //             };
-    //             const dbref = ref(db, "chat/" + combinedID + "/messege");
-    //             await push(dbref, data);
-    //           })
-    //           .catch((err) => console.log(err));
-    //       })
-    //       .catch((err) => console.log(err)));
-
-    //   await update(ref(db, "userchat/" + userid + "/" + combinedID + "/"), {
-    //     date: serverTimestamp(),
-    //   });
-    //   await update(
-    //     ref(db, "userchat/" + userid + "/" + combinedID + "/userinfo/"),
-    //     {
-    //       text: "sent a photo",
-    //     }
-    //   ).then(() => setfile(null));
-    // }
   };
   return (
     <div className="h-full overflow-hidden">

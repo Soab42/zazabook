@@ -23,10 +23,16 @@ export default function Messege({ id }) {
       {massege ? (
         Object.entries(massege).map((x) => {
           // console.log(x);
-          let { text, time, username, img } = x[1];
+          let { text, time, username, img, userimg } = x[1];
 
           return (
-            <Textmsg text={text} img={img} time={time} username={username} />
+            <Textmsg
+              text={text}
+              img={img}
+              time={time}
+              username={username}
+              userimg={userimg}
+            />
           );
         })
       ) : (

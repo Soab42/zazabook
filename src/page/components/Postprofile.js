@@ -3,22 +3,22 @@
 import { ref, onValue, orderByChild, remove } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { db } from "../../Firebase";
-
 import moment from "moment/moment";
 import { Lock } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import Like from "./Like";
 import Option from "./Option";
-
+// import userEvent from "@testing-library/user-event";
 import { useAuth } from "../../context/Authcontext";
+import Dplink from "./Dplink";
 
-export default function Post() {
+export default function Postprofile({ id }) {
   const [data, setData] = useState([]);
   const { user } = useAuth();
   // const [show, setShow] = useState(false);
   // const menulist = () => {
   //   show ? setShow(false) : setShow(true);
   // };
+
   const deletepost = (refurl) => {
     const dataref = ref(db, refurl);
     // console.log(dataref);
@@ -40,7 +40,7 @@ export default function Post() {
     <div>
       {final.sort((a, b) => a.time - b.time) &&
         final
-          // .filter((a) => a.name === auth.currentUser.displayName)
+          .filter((a) => a.uid === id)
           .map((x) => {
             const { img, name, post, time, uid, likes, share, comments } = x;
             const refurl = `public/${uid}/${time}`;
@@ -50,9 +50,8 @@ export default function Post() {
                   <div className="flex justify-between gap-2 capitalize">
                     <img className="img" src={img} alt="" />
                     <div className="relative">
-                      <Link to={`profile/${uid}`}>
-                        <p className="font-semibold">{name}</p>
-                      </Link>
+                      <Dplink name={name} id={uid} />
+
                       <p className="absolute bottom-0 text-xs scale-75 -left-3  min-w-max flex gap-2">
                         {moment(time).fromNow()}
                         <Lock fontSize="small" />
